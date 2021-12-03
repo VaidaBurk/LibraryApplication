@@ -1,7 +1,7 @@
 # LibraryApplication
  A console application to manage book library.
  
- Comands to manage books:
+ Comands to manage books: \n
  List books -> to print list of all books in the library
  Filter books list -> to print filtered list according to given parameter
  Add book -> to add new book to the library
