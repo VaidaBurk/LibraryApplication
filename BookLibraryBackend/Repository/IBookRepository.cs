@@ -6,8 +6,8 @@ namespace BookLibraryBackend.Repository
 {
     public interface IBookRepository
     {
-        public List<Book> ReadFileAndDeserialize(string filePath);
+        public List<Book> ReadFileAndDeserialize();
 
-        public void WriteToFile(Object anyObject, string filePath);
+        public void WriteToFile(Object anyObject);
     }
 }

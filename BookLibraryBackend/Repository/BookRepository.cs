@@ -8,16 +8,29 @@ namespace BookLibraryBackend.Repository
 {
     public class BookRepository : IBookRepository
     {
-        public virtual List<Book> ReadFileAndDeserialize(string filePath)
+        private const string _filePath = "books.json";
+
+        public BookRepository()
         {
-            string jsonData = File.ReadAllText(filePath);
+            if (!File.Exists(_filePath))
+            {
+                var jsonFile = File.Create(_filePath);
+                jsonFile.Close();
+                List<Book> books = new();
+                WriteToFile(books);
+            }
+        }
+
+        public virtual List<Book> ReadFileAndDeserialize()
+        {
+            string jsonData = File.ReadAllText(_filePath);
             return JsonConvert.DeserializeObject<List<Book>>(jsonData);
         }
 
-        public virtual void WriteToFile(Object anyObject, string filePath)
+        public virtual void WriteToFile(Object anyObject)
         {
             string jsonString = JsonConvert.SerializeObject(anyObject);
-            File.WriteAllText(filePath, jsonString);
+            File.WriteAllText(_filePath, jsonString);
         }
     }
 }

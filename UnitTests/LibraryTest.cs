@@ -34,9 +34,9 @@ namespace UnitTests
             List<Book> books = new() { book };
 
             Mock<IBookRepository> mockBookRepository = new();
-            mockBookRepository.Setup(b => b.ReadFileAndDeserialize("books.json")).Returns(books);
+            mockBookRepository.Setup(b => b.ReadFileAndDeserialize()).Returns(books);
 
-            BookService bookService = new(mockBookRepository.Object);
+            BookReader bookService = new(mockBookRepository.Object);
 
             // act
             List<Book> fetchedBooks = bookService.GetBooks();
@@ -53,5 +53,34 @@ namespace UnitTests
             Assert.AreEqual(book.ReaderId, fetchedBook.ReaderId);
             Assert.AreEqual(book.ReturnDeadline, fetchedBook.ReturnDeadline);
         }
+
+        //[Test]
+        //public void GetBookByIsbnTest()
+        //{
+        //    //arrange
+        //    var book = new Book()
+        //    {
+        //        Name = "testName",
+        //        Author = "testAuthor",
+        //        Category = "testCategory",
+        //        Language = "testLang",
+        //        PublicationDate = "1900",
+        //        ISBN = "testIsbn12345",
+        //        IsBookTaken = false,
+        //        ReaderId = 1,
+        //        ReturnDeadline = System.DateTime.Now,
+        //    };
+        //    List<Book> books = new() { book };
+
+        //    string isbn = "0000000000000";
+        //    Mock<IBookRepository> mockBookRepository = new();
+
+        //    // act
+        //    BookAction bookAction = new(mockBookRepository.Object, new BookReader(mockBookRepository.Object));
+        //    Book fetchedBook = bookAction.GetBookByIsbn(isbn, books);
+
+        //    //assert
+        //    Assert.AreEqual(null, fetchedBook);
+        //}
     }
 }
